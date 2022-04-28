@@ -38,7 +38,7 @@
             this.Gleis_Ankunft = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Abfahrtstafek_Label = new System.Windows.Forms.Label();
             this.Suchen_Button = new System.Windows.Forms.Button();
-            this.EingabeTextbox = new System.Windows.Forms.TextBox();
+            this.SucheCombobox = new System.Windows.Forms.ComboBox();
             ((System.ComponentModel.ISupportInitialize)(this.Abfahrtstafel_Gridview)).BeginInit();
             this.SuspendLayout();
             // 
@@ -47,7 +47,7 @@
             this.zurück_Button.Dock = System.Windows.Forms.DockStyle.Bottom;
             this.zurück_Button.Location = new System.Drawing.Point(0, 894);
             this.zurück_Button.Name = "zurück_Button";
-            this.zurück_Button.Size = new System.Drawing.Size(1713, 124);
+            this.zurück_Button.Size = new System.Drawing.Size(1908, 124);
             this.zurück_Button.TabIndex = 1;
             this.zurück_Button.Text = "Zurück zum Menü";
             this.zurück_Button.UseVisualStyleBackColor = true;
@@ -69,7 +69,7 @@
             this.Abfahrtstafel_Gridview.Name = "Abfahrtstafel_Gridview";
             this.Abfahrtstafel_Gridview.RowHeadersWidth = 102;
             this.Abfahrtstafel_Gridview.RowTemplate.Height = 49;
-            this.Abfahrtstafel_Gridview.Size = new System.Drawing.Size(1713, 661);
+            this.Abfahrtstafel_Gridview.Size = new System.Drawing.Size(1908, 661);
             this.Abfahrtstafel_Gridview.TabIndex = 2;
             // 
             // Abfahrtsort
@@ -98,13 +98,13 @@
             // 
             // Gleis_Abfahrt
             // 
-            this.Gleis_Abfahrt.HeaderText = "Gleis_Abfahrt";
+            this.Gleis_Abfahrt.HeaderText = "Gleis oder Kante Abfahrt";
             this.Gleis_Abfahrt.MinimumWidth = 12;
             this.Gleis_Abfahrt.Name = "Gleis_Abfahrt";
             // 
             // Gleis_Ankunft
             // 
-            this.Gleis_Ankunft.HeaderText = "Gleis_Ankunft";
+            this.Gleis_Ankunft.HeaderText = "Gleis oder Kante Ankunft";
             this.Gleis_Ankunft.MinimumWidth = 12;
             this.Gleis_Ankunft.Name = "Gleis_Ankunft";
             // 
@@ -113,7 +113,7 @@
             this.Abfahrtstafek_Label.Anchor = System.Windows.Forms.AnchorStyles.Top;
             this.Abfahrtstafek_Label.AutoSize = true;
             this.Abfahrtstafek_Label.Font = new System.Drawing.Font("Segoe UI", 30F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point);
-            this.Abfahrtstafek_Label.Location = new System.Drawing.Point(29, 65);
+            this.Abfahrtstafek_Label.Location = new System.Drawing.Point(127, 65);
             this.Abfahrtstafek_Label.Name = "Abfahrtstafek_Label";
             this.Abfahrtstafek_Label.Size = new System.Drawing.Size(623, 133);
             this.Abfahrtstafek_Label.TabIndex = 3;
@@ -129,19 +129,23 @@
             this.Suchen_Button.UseVisualStyleBackColor = true;
             this.Suchen_Button.Click += new System.EventHandler(this.Suchen_Button_Click);
             // 
-            // EingabeTextbox
+            // SucheCombobox
             // 
-            this.EingabeTextbox.Location = new System.Drawing.Point(1111, 38);
-            this.EingabeTextbox.Name = "EingabeTextbox";
-            this.EingabeTextbox.Size = new System.Drawing.Size(537, 47);
-            this.EingabeTextbox.TabIndex = 5;
+            this.SucheCombobox.FormattingEnabled = true;
+            this.SucheCombobox.Location = new System.Drawing.Point(1111, 30);
+            this.SucheCombobox.Name = "SucheCombobox";
+            this.SucheCombobox.Size = new System.Drawing.Size(537, 49);
+            this.SucheCombobox.TabIndex = 6;
+            this.SucheCombobox.TextChanged += new System.EventHandler(this.SucheCombobox_TextChanged);
+            this.SucheCombobox.KeyDown += new System.Windows.Forms.KeyEventHandler(this.SucheCombobox_KeyDown);
+            this.SucheCombobox.KeyUp += new System.Windows.Forms.KeyEventHandler(this.SucheCombobox_KeyUp);
             // 
             // Abfahrtstafel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(17F, 41F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1713, 1018);
-            this.Controls.Add(this.EingabeTextbox);
+            this.ClientSize = new System.Drawing.Size(1908, 1018);
+            this.Controls.Add(this.SucheCombobox);
             this.Controls.Add(this.Suchen_Button);
             this.Controls.Add(this.Abfahrtstafek_Label);
             this.Controls.Add(this.Abfahrtstafel_Gridview);
@@ -158,14 +162,14 @@
 
         private Button zurück_Button;
         private DataGridView Abfahrtstafel_Gridview;
+        private Label Abfahrtstafek_Label;
+        private Button Suchen_Button;
         private DataGridViewTextBoxColumn Abfahrtsort;
         private DataGridViewTextBoxColumn Ankunftsort;
         private DataGridViewTextBoxColumn Abfahrt;
         private DataGridViewTextBoxColumn Ankunft;
         private DataGridViewTextBoxColumn Gleis_Abfahrt;
         private DataGridViewTextBoxColumn Gleis_Ankunft;
-        private Label Abfahrtstafek_Label;
-        private Button Suchen_Button;
-        private TextBox EingabeTextbox;
+        private ComboBox SucheCombobox;
     }
 }

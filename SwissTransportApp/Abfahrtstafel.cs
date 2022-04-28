@@ -29,12 +29,78 @@ namespace SwissTransportApp
 
         private void Suchen_Button_Click(object sender, EventArgs e)
         {
-            List<Connection> list = transport.GetConnections("Buttisholz, Dorf",EingabeTextbox.Text).ConnectionList;
+            Abfahrtstafel_Gridview.Rows.Clear();
+            
+                var list = transport.GetStationBoard(SucheCombobox.Text, SucheCombobox.Text);
 
-            foreach (Connection connection in list)
+            foreach (StationBoard connection in list.Entries)
             {
-                Abfahrtstafel_Gridview.Rows.Add(connection.From.Station.Name,connection.To.Station.Name,connection.From.Departure,connection.To.Arrival,connection.From.Platform,connection.To.Platform);
+                Abfahrtstafel_Gridview.Rows.Add(list.Station.Name,connection.To,connection.Stop.Departure);
+                
             }
+        }
+
+    
+
+        private void SucheCombobox_TextChanged(object sender, EventArgs e)
+        {
+          
+                
+                
+                
+                
+            
+
+
+        }
+        private void ClearAll(ComboBox combobox)
+        {
+            var items = combobox.Items;
+            foreach (var item in items)
+            {
+                combobox.Items.Remove(item);
+            }
+
+
+        }
+
+        private void SucheCombobox_KeyDown(object sender, KeyEventArgs e)
+        {
+           
+
+        }
+                List<string> list = new List<string>();
+        Stations stations;
+        string ErstesItem;
+        private void SucheCombobox_KeyUp(object sender, KeyEventArgs e)
+        {
+            if (SucheCombobox.Text.Length == 6)
+            {
+
+                SucheCombobox.Items.Clear();
+
+
+
+                ErstesItem = SucheCombobox.Text;
+
+                stations = transport.GetStations(ErstesItem);
+
+                foreach (var Station in stations.StationList)
+                {
+                    list.Add(Station.Name);
+                }
+
+
+
+                foreach (var item in list)
+                {
+                    SucheCombobox.Items.Add(item);
+                }
+                SucheCombobox.DroppedDown = true;
+
+            }
+            SucheCombobox.SelectionStart = SucheCombobox.Text.Length + 1;
+
         }
     }
 }
