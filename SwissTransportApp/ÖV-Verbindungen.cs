@@ -18,7 +18,6 @@ namespace SwissTransportApp
         {
             InitializeComponent();
         }
-        TransportVia transportVia = new TransportVia();
         ITransport transport = new Transport(); 
         
         private void zurück_Button_Click(object sender, EventArgs e)
@@ -34,9 +33,10 @@ namespace SwissTransportApp
         private void SuchenButton_Click(object sender, EventArgs e)
         {
             Abfahrtstafel_Gridview.Rows.Clear();
+           
             if (ViaCombo.Text == "")
             {
-                var listCon = transport.GetConnections(AbfahrtCombo.Text, AnkunftCombo.Text);
+                var listCon = transport.GetConnectionsDate(AbfahrtCombo.Text, AnkunftCombo.Text,datePicker.Value, timePicker.Value);
                 foreach (Connection connection in listCon.ConnectionList)
                 {
                     Abfahrtstafel_Gridview.Rows.Add(connection.From.Station.Name, connection.To.Station.Name, connection.From.Departure, connection.To.Arrival, connection.From.Platform,connection.To.Platform);
@@ -44,8 +44,8 @@ namespace SwissTransportApp
             }
             else
             {
-                var list = transportVia.GetConnectionsVia(AbfahrtCombo.Text, AnkunftCombo.Text, ViaCombo.Text);
-                foreach (Connection connection in list.ConnectionViaList)
+                var listCon = transport.GetConnectionsVia(AbfahrtCombo.Text, AnkunftCombo.Text,ViaCombo.Text, datePicker.Value, timePicker.Value);
+                foreach (Connection connection in listCon.ConnectionList)
                 {
                     Abfahrtstafel_Gridview.Rows.Add(connection.From.Station.Name, connection.To.Station.Name, connection.From.Departure, connection.To.Arrival, connection.From.Platform, connection.To.Platform);
                 }
@@ -54,8 +54,8 @@ namespace SwissTransportApp
 
         private void AbfahrtCombo_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyData == Keys.Enter)
-            {
+           
+            
                 AbfahrtCombo.Items.Clear();
 
                 string ErstesItem = AbfahrtCombo.Text;
@@ -73,7 +73,7 @@ namespace SwissTransportApp
                 }
                 AbfahrtCombo.DroppedDown = true;
 
-            }
+            
         }
 
         private void AnkunftCombo_KeyUp(object sender, KeyEventArgs e)

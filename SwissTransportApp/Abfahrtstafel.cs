@@ -69,18 +69,22 @@ namespace SwissTransportApp
            
 
         }
-                List<string> list = new List<string>();
+        List<string> list = new List<string>();
+
         Stations stations;
         string ErstesItem;
         private void SucheCombobox_KeyUp(object sender, KeyEventArgs e)
         {
-            if (SucheCombobox.Text.Length == 6)
+
+           
+
+            if (SucheCombobox.Text.Length == 5)
             {
-
                 SucheCombobox.Items.Clear();
+               
 
 
-
+                SucheCombobox.SelectionStart = SucheCombobox.Text.Length + 1;
                 ErstesItem = SucheCombobox.Text;
 
                 stations = transport.GetStations(ErstesItem);
@@ -90,16 +94,14 @@ namespace SwissTransportApp
                     list.Add(Station.Name);
                 }
 
-
-
                 foreach (var item in list)
                 {
                     SucheCombobox.Items.Add(item);
                 }
+
                 SucheCombobox.DroppedDown = true;
 
             }
-            SucheCombobox.SelectionStart = SucheCombobox.Text.Length + 1;
 
         }
     }

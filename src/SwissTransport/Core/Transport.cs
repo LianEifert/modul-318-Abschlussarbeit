@@ -12,6 +12,9 @@
 
         private readonly HttpClient httpClient = new HttpClient();
 
+        
+        
+
         public Stations GetStations(string query)
         {
             if (string.IsNullOrEmpty(query))
@@ -55,6 +58,23 @@
             return this.GetObject<Connections>(uri);
         }
 
+        public Connections GetConnectionsDate(string fromStation, string toStation, DateTime date, DateTime time)
+        {
+            if (string.IsNullOrEmpty(fromStation))
+            {
+                throw new ArgumentNullException(nameof(fromStation));
+            }
+
+            if (string.IsNullOrEmpty(toStation))
+            {
+                throw new ArgumentNullException(nameof(toStation));
+            }
+
+            var uri = new Uri($"{WebApiHost}connections?from={fromStation}&to={toStation}&date={date}&time={time}");
+            return this.GetObject<Connections>(uri);
+        }
+
+
         public void Dispose()
         {
             this.httpClient?.Dispose();
@@ -72,6 +92,27 @@
                 .GetResult();
 
             return JsonConvert.DeserializeObject<T>(content);
+        }
+
+        public Connections GetConnectionsVia(string fromStation, string toStation,string via, DateTime date, DateTime time)
+        {
+            if (string.IsNullOrEmpty(fromStation))
+            {
+                throw new ArgumentNullException(nameof(fromStation));
+            }
+
+            if (string.IsNullOrEmpty(toStation))
+            {
+                throw new ArgumentNullException(nameof(toStation));
+            }
+            if (string.IsNullOrEmpty(via))
+            {
+                throw new ArgumentNullException(nameof(toStation));
+            }
+
+            var uri = new Uri($"{WebApiHost}connections?from={fromStation}&to={toStation}&via[]={via}&date={date}&time={time}");
+
+            return this.GetObject<Connections>(uri);
         }
     }
 }
