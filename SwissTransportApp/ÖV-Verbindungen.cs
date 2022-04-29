@@ -160,6 +160,7 @@ namespace SwissTransportApp
 
                     ViaCombo.DroppedDown = true;
 
+
                 }
             }
             catch(Exception ex)
