@@ -20,108 +20,154 @@ namespace SwissTransportApp
         }
         ITransport transport = new Transport(); 
         
-        private void zurück_Button_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            Form1 form1 = new Form1();
-            form1.Show();
-
-            
-
-        }
+      
 
         private void SuchenButton_Click(object sender, EventArgs e)
         {
-            Abfahrtstafel_Gridview.Rows.Clear();
-           
-            if (ViaCombo.Text == "")
+            try
             {
-                var listCon = transport.GetConnectionsDate(AbfahrtCombo.Text, AnkunftCombo.Text,datePicker.Value, timePicker.Value);
-                foreach (Connection connection in listCon.ConnectionList)
+
+
+                Abfahrtstafel_Gridview.Rows.Clear();
+
+                if (ViaCombo.Text == "")
                 {
-                    Abfahrtstafel_Gridview.Rows.Add(connection.From.Station.Name, connection.To.Station.Name, connection.From.Departure, connection.To.Arrival, connection.From.Platform,connection.To.Platform);
+                    var listCon = transport.GetConnectionsDate(AbfahrtCombo.Text, AnkunftCombo.Text, datePicker.Value, timePicker.Value);
+                    foreach (Connection connection in listCon.ConnectionList)
+                    {
+                        Abfahrtstafel_Gridview.Rows.Add(connection.From.Station.Name, connection.To.Station.Name, connection.From.Departure, connection.To.Arrival, connection.From.Platform, connection.To.Platform);
+                    }
+                }
+                else
+                {
+                    var listCon = transport.GetConnectionsVia(AbfahrtCombo.Text, AnkunftCombo.Text, ViaCombo.Text, datePicker.Value, timePicker.Value);
+                    foreach (Connection connection in listCon.ConnectionList)
+                    {
+                        Abfahrtstafel_Gridview.Rows.Add(connection.From.Station.Name, connection.To.Station.Name, connection.From.Departure, connection.To.Arrival, connection.From.Platform, connection.To.Platform);
+                    }
                 }
             }
-            else
+            catch (Exception ex)
             {
-                var listCon = transport.GetConnectionsVia(AbfahrtCombo.Text, AnkunftCombo.Text,ViaCombo.Text, datePicker.Value, timePicker.Value);
-                foreach (Connection connection in listCon.ConnectionList)
-                {
-                    Abfahrtstafel_Gridview.Rows.Add(connection.From.Station.Name, connection.To.Station.Name, connection.From.Departure, connection.To.Arrival, connection.From.Platform, connection.To.Platform);
-                }
+                MessageBox.Show(ex.Message);
             }
         }
-
+        List<string> list = new List<string>();
+        List<string> list2 = new List<string>();
+        List<string> list3 = new List<string>();
         private void AbfahrtCombo_KeyUp(object sender, KeyEventArgs e)
         {
-           
-            
-                AbfahrtCombo.Items.Clear();
+            try
+            {
 
-                string ErstesItem = AbfahrtCombo.Text;
 
-                var Stations = transport.GetStations(ErstesItem);
-                List<string> liste = new List<string>();
 
-                foreach (var Station in Stations.StationList)
+                if (AbfahrtCombo.Text.Length == 5)
                 {
-                    liste.Add(Station.Name);
-                }
-                foreach (var item in liste)
-                {
-                    AbfahrtCombo.Items.Add(item);
-                }
-                AbfahrtCombo.DroppedDown = true;
+                    AbfahrtCombo.Items.Clear();
 
-            
+
+
+                    AbfahrtCombo.SelectionStart = AbfahrtCombo.Text.Length + 1;
+                    var ErstesItem = AbfahrtCombo.Text;
+
+                    var stations = transport.GetStations(ErstesItem);
+
+                    foreach (var Station in stations.StationList)
+                    {
+                        list.Add(Station.Name);
+                    }
+
+                    foreach (var item in list)
+                    {
+                        AbfahrtCombo.Items.Add(item);
+                    }
+
+                    AbfahrtCombo.DroppedDown = true;
+
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+
         }
 
         private void AnkunftCombo_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyData == Keys.Enter)
+            try
             {
-                AnkunftCombo.Items.Clear();
 
-                string ErstesItem = AnkunftCombo.Text;
 
-                var Stations = transport.GetStations(ErstesItem);
-                List<string> list = new List<string>();
-
-                foreach (var Station in Stations.StationList)
+                if (AnkunftCombo.Text.Length == 5)
                 {
-                    list.Add(Station.Name);
-                }
-                foreach (var item in list)
-                {
-                    AnkunftCombo.Items.Add(item);
-                }
-                AnkunftCombo.DroppedDown = true;
+                    AnkunftCombo.Items.Clear();
 
+
+
+                    AnkunftCombo.SelectionStart = AnkunftCombo.Text.Length + 1;
+                    var ErstesItem = AnkunftCombo.Text;
+
+                    var stations = transport.GetStations(ErstesItem);
+
+                    foreach (var Station in stations.StationList)
+                    {
+                        list2.Add(Station.Name);
+                    }
+
+                    foreach (var item in list2)
+                    {
+                        AnkunftCombo.Items.Add(item);
+                    }
+
+                    AnkunftCombo.DroppedDown = true;
+
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
-
+        
         private void ViaCombo_KeyUp(object sender, KeyEventArgs e)
         {
-            if (e.KeyData == Keys.Enter)
+            try
             {
-                ViaCombo.Items.Clear();
 
-                string ErstesItem = ViaCombo.Text;
 
-                var Stations = transport.GetStations(ErstesItem);
-                List<string> list = new List<string>();
-
-                foreach (var Station in Stations.StationList)
+                if (ViaCombo.Text.Length == 5)
                 {
-                    list.Add(Station.Name);
-                }
-                foreach (var item in list)
-                {
-                    ViaCombo.Items.Add(item);
-                }
-                ViaCombo.DroppedDown = true;
+                    ViaCombo.Items.Clear();
 
+
+
+                    ViaCombo.SelectionStart = ViaCombo.Text.Length + 1;
+                    var ErstesItem = ViaCombo.Text;
+
+                    var stations = transport.GetStations(ErstesItem);
+
+                    foreach (var Station in stations.StationList)
+                    {
+                        list3.Add(Station.Name);
+                    }
+
+                    foreach (var item in list3)
+                    {
+                        ViaCombo.Items.Add(item);
+                    }
+
+                    ViaCombo.DroppedDown = true;
+
+                }
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
         }
+
+       
     }
 }

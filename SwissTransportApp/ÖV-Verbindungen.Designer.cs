@@ -28,7 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.zurück_Button = new System.Windows.Forms.Button();
             this.Verbindungstafel_Text = new System.Windows.Forms.Label();
             this.Abfahrtstafel_Gridview = new System.Windows.Forms.DataGridView();
             this.Abfahrtsort = new System.Windows.Forms.DataGridViewTextBoxColumn();
@@ -49,17 +48,6 @@
             this.timePicker = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.Abfahrtstafel_Gridview)).BeginInit();
             this.SuspendLayout();
-            // 
-            // zurück_Button
-            // 
-            this.zurück_Button.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.zurück_Button.Location = new System.Drawing.Point(0, 1164);
-            this.zurück_Button.Name = "zurück_Button";
-            this.zurück_Button.Size = new System.Drawing.Size(2227, 124);
-            this.zurück_Button.TabIndex = 0;
-            this.zurück_Button.Text = "Zurück zum Menü";
-            this.zurück_Button.UseVisualStyleBackColor = true;
-            this.zurück_Button.Click += new System.EventHandler(this.zurück_Button_Click);
             // 
             // Verbindungstafel_Text
             // 
@@ -83,11 +71,11 @@
             this.Gleis_Abfahrt,
             this.Gleis_Ankunft});
             this.Abfahrtstafel_Gridview.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.Abfahrtstafel_Gridview.Location = new System.Drawing.Point(0, 591);
+            this.Abfahrtstafel_Gridview.Location = new System.Drawing.Point(0, 482);
             this.Abfahrtstafel_Gridview.Name = "Abfahrtstafel_Gridview";
             this.Abfahrtstafel_Gridview.RowHeadersWidth = 102;
             this.Abfahrtstafel_Gridview.RowTemplate.Height = 49;
-            this.Abfahrtstafel_Gridview.Size = new System.Drawing.Size(2227, 573);
+            this.Abfahrtstafel_Gridview.Size = new System.Drawing.Size(2227, 806);
             this.Abfahrtstafel_Gridview.TabIndex = 3;
             // 
             // Abfahrtsort
@@ -235,7 +223,6 @@
             this.Controls.Add(this.SuchenButton);
             this.Controls.Add(this.Abfahrtstafel_Gridview);
             this.Controls.Add(this.Verbindungstafel_Text);
-            this.Controls.Add(this.zurück_Button);
             this.Name = "ÖV_Verbindungen";
             this.Text = "ÖV_Verbindungen";
             ((System.ComponentModel.ISupportInitialize)(this.Abfahrtstafel_Gridview)).EndInit();
@@ -245,8 +232,6 @@
         }
 
         #endregion
-
-        private Button zurück_Button;
         private Label Verbindungstafel_Text;
         private DataGridView Abfahrtstafel_Gridview;
         private DataGridViewTextBoxColumn Abfahrtsort;

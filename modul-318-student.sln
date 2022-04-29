@@ -7,7 +7,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SwissTransport", "src\Swiss
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SwissTransportTest", "tests\SwissTransportTest\SwissTransportTest.csproj", "{959C6E54-5B1C-40F5-938A-C57B17451421}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SwissTransportApp", "SwissTransportApp\SwissTransportApp.csproj", "{68DB6FF3-3373-4646-88DF-28626DC7E38F}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SwissTransportApp", "SwissTransportApp\SwissTransportApp.csproj", "{68DB6FF3-3373-4646-88DF-28626DC7E38F}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

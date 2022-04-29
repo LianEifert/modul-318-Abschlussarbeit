@@ -20,89 +20,73 @@ namespace SwissTransportApp
         }
         ITransport transport = new Transport();
 
-        private void zurück_Button_Click(object sender, EventArgs e)
-        {
-            this.Hide();
-            Form1 form1 = new Form1();
-            form1.Show();  
-        }
+       
 
         private void Suchen_Button_Click(object sender, EventArgs e)
         {
-            Abfahrtstafel_Gridview.Rows.Clear();
-            
+            try
+            {
+                Abfahrtstafel_Gridview.Rows.Clear();
+
                 var list = transport.GetStationBoard(SucheCombobox.Text, SucheCombobox.Text);
 
-            foreach (StationBoard connection in list.Entries)
+                foreach (StationBoard connection in list.Entries)
+                {
+                    Abfahrtstafel_Gridview.Rows.Add(list.Station.Name, connection.To, connection.Stop.Departure);
+
+                }
+            }
+            catch (Exception ex)
             {
-                Abfahrtstafel_Gridview.Rows.Add(list.Station.Name,connection.To,connection.Stop.Departure);
-                
+                MessageBox.Show(ex.Message);
             }
         }
 
     
 
-        private void SucheCombobox_TextChanged(object sender, EventArgs e)
-        {
-          
-                
-                
-                
-                
-            
+        
+     
 
-
-        }
-        private void ClearAll(ComboBox combobox)
-        {
-            var items = combobox.Items;
-            foreach (var item in items)
-            {
-                combobox.Items.Remove(item);
-            }
-
-
-        }
-
-        private void SucheCombobox_KeyDown(object sender, KeyEventArgs e)
-        {
-           
-
-        }
+        
         List<string> list = new List<string>();
 
         Stations stations;
         string ErstesItem;
         private void SucheCombobox_KeyUp(object sender, KeyEventArgs e)
         {
-
-           
-
-            if (SucheCombobox.Text.Length == 5)
+            try
             {
-                SucheCombobox.Items.Clear();
-               
-
-
-                SucheCombobox.SelectionStart = SucheCombobox.Text.Length + 1;
-                ErstesItem = SucheCombobox.Text;
-
-                stations = transport.GetStations(ErstesItem);
-
-                foreach (var Station in stations.StationList)
+                if (SucheCombobox.Text.Length == 4)
                 {
-                    list.Add(Station.Name);
+                    SucheCombobox.Items.Clear();
+
+
+
+                    SucheCombobox.SelectionStart = SucheCombobox.Text.Length + 1;
+                    ErstesItem = SucheCombobox.Text;
+
+                    stations = transport.GetStations(ErstesItem);
+
+                    foreach (var Station in stations.StationList)
+                    {
+                        list.Add(Station.Name);
+                    }
+
+                    foreach (var item in list)
+                    {
+                        SucheCombobox.Items.Add(item);
+                    }
+
+                    SucheCombobox.DroppedDown = true;
                 }
-
-                foreach (var item in list)
-                {
-                    SucheCombobox.Items.Add(item);
-                }
-
-                SucheCombobox.DroppedDown = true;
-
+            }
+            catch(Exception ex)
+            {
+                MessageBox.Show(ex.Message);
             }
 
         }
+
+       
     }
 }
