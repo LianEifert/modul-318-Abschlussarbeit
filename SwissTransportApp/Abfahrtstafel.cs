@@ -79,6 +79,7 @@ namespace SwissTransportApp
 
                     SucheCombobox.DroppedDown = true;
                 }
+
             }
             catch(Exception ex)
             {
